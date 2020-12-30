@@ -33,6 +33,11 @@ Route::group(['prefix' => 'v1'], function() {
     ]);
     
     
+    Route::get('/datapasien/datawith/data', [
+        'uses' => 'DataPasienController@getall'
+    ]);
+    
+    
     Route::post('/admin/register', [
         'uses' => 'AuthController@store'
     ]);

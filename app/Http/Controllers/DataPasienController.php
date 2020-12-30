@@ -205,4 +205,23 @@ class DataPasienController extends Controller
 
         return response()->json($response, 200);
     }
+
+    public function getall()
+    {
+        $datapasiens = DataPasien::with('jadwal_minums')->with('jadwal_obats')->get();
+
+        foreach($datapasiens as $datapasien){
+            $datapasien->dataview_pasien = [
+                'href' => 'api/v1/datapasien/' . $datapasien->id,
+                'method' => 'GET'
+            ];
+        }
+
+        $response = [
+            'message' => 'List of all datapasiens',
+            'datapasiens' => $datapasiens
+        ];
+
+        return response()->json($response, 200);
+    }
 }
